@@ -13,7 +13,6 @@ namespace MantisTests
     {
         protected IWebDriver driver;
         protected ApplicationManager manager;
-        string localPath = TestContext.CurrentContext.TestDirectory + @"\config_inc.php";
         public BaseHelper(ApplicationManager manager)
         {
             this.manager = manager;

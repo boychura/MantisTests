@@ -17,6 +17,7 @@ namespace MantisTests
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
+
         private ApplicationManager()
         {
             driver = new FirefoxDriver();
@@ -27,6 +28,9 @@ namespace MantisTests
             Ftp = new FtpHelper(this);
             James = new JamesHelper(this);
             Mail = new MailHelper(this);
+            Auth = new LoginHelper(this);
+            Navigator = new ManagementMenuHelper(this, baseURL);
+            Project = new ProjectManagementHelper(this);
         }
 
         ~ApplicationManager()
@@ -63,5 +67,8 @@ namespace MantisTests
         public FtpHelper Ftp { get; set; }
         public JamesHelper James { get; set; }
         public MailHelper Mail { get; set; }
+        public LoginHelper Auth { get; set; }
+        public ManagementMenuHelper Navigator { get; set; }
+        public ProjectManagementHelper Project { get; set; }
     }
 }
