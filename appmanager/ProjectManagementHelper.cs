@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Text.RegularExpressions;
 
 namespace MantisTests
 {
@@ -34,6 +35,31 @@ namespace MantisTests
             SubmitProjectDeleting();
 
             return this;
+        }
+
+        public List<ProjectData> GetAllProjects()
+        {
+            List<ProjectData> projects = new List<ProjectData>();
+
+            OpenProjectsPage();
+            IList<IWebElement> rows = driver.FindElement(By.CssSelector(".table")).FindElements(By.CssSelector("tbody tr"));
+            foreach (IWebElement row in rows)
+            {
+                IWebElement link = row.FindElement(By.TagName("a"));
+                string name = link.Text;
+                string href = link.GetAttribute("href");
+                Match m = Regex.Match(href, @"\d+$");
+                string id = m.Value;
+
+                projects.Add(new ProjectData()
+                {
+                    Name = name,
+                    Id = id
+                });
+            }
+            manager.Navigator.GoToMainPage();
+
+            return projects;
         }
 
         private void SubmitProjectDeleting()

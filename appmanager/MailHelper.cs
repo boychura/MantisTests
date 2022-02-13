@@ -23,6 +23,7 @@ namespace MantisTests
                     MailMessage message = pop3.GetMessage(1);//in lection was ReadOnlyMailMessage
                     string body = message.Body;
                     pop3.DeleteMessage(1);
+                    pop3.LogOut();
                     return body;
                 }
                 else

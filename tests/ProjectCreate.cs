@@ -15,8 +15,16 @@ namespace MantisTests
         {
             ProjectData newProject = new ProjectData("Project" + DateTime.Now, "a lot of description1");
 
+            List<ProjectData> oldProjects = app.Project.GetAllProjects();
+            ProjectData existingProject = oldProjects.Find(x => x.Name == newProject.Name);
+            if (existingProject != null)
+            {
+                app.Api.DeleteProject(new AccountData("administrator", "root"), newProject);
+            }
+
             app.Project.Create(newProject);
-            app.Navigator.GoToMainPage();
+            List<ProjectData> newProjects = app.Project.GetAllProjects();
+            Assert.AreEqual((oldProjects.Count + 1), newProjects.Count);
         }
     }
 }

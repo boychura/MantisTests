@@ -12,7 +12,7 @@ namespace MantisTests
         [OneTimeSetUp]
         public void SetupLogin()
         {
-            app.Auth.Login(new AccountData("administrator", "1234"));
+            app.Auth.Login(new AccountData("administrator", "root"));
         }
     }
 }

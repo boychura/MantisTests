@@ -33,7 +33,7 @@ namespace MantisTests
 
         public void OpenProjectsTab()
         {
-            driver.FindElement(By.XPath("/html/body/div[2]/div[2]/div[2]/div/ul/li[3]/a")).Click();
+            driver.FindElement(By.CssSelector(".nav-tabs li:nth-child(3)")).Click();
         }
     }
 }
