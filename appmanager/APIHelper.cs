@@ -29,5 +29,28 @@ namespace MantisTests
             Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
             client.mc_project_delete(account.Name, account.Password, project.Id);
         }
+        public void CreateProject(AccountData account, ProjectData projectData)
+        {
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData project = new Mantis.ProjectData();
+            project.name = projectData.Name;
+            project.description = projectData.Description;
+            project.status = new Mantis.ObjectRef();
+            project.status.name = projectData.Status;
+            client.mc_project_add(account.Name, account.Password, project);
+        }
+
+        public ProjectData GetAllProjectsApi(AccountData account)
+        {
+            ProjectData projects = new ProjectData();
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData projectData = new Mantis.ProjectData();
+            projectData.name = projects.Name;
+            projectData.description = projects.Description;
+            projectData.id = projects.Id;
+            //projects = client.mc_projects_get_user_accessible(account.Name, account.Password);
+
+            return projects;
+        }
     }
 }

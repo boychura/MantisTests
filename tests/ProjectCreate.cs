@@ -13,16 +13,21 @@ namespace MantisTests
         [Test]
         public void TestProjectCreation()
         {
-            ProjectData newProject = new ProjectData("Project" + DateTime.Now, "a lot of description1");
+            ProjectData newProject = new ProjectData("Project" + DateTime.Now, "a lot of description1")
+            {
+                Status = "release"
+            };
+            AccountData user = new AccountData("administrator", "root");
 
             List<ProjectData> oldProjects = app.Project.GetAllProjects();
             ProjectData existingProject = oldProjects.Find(x => x.Name == newProject.Name);
             if (existingProject != null)
             {
-                app.Api.DeleteProject(new AccountData("administrator", "root"), newProject);
+                app.Api.DeleteProject(user, newProject);
             }
 
-            app.Project.Create(newProject);
+            //app.Project.Create(newProject);
+            app.Api.CreateProject(user, newProject);
             List<ProjectData> newProjects = app.Project.GetAllProjects();
             Assert.AreEqual((oldProjects.Count + 1), newProjects.Count);
         }

@@ -14,16 +14,24 @@ namespace MantisTests
         [Test]
         public void Test1()
         {
-            ProjectData newProject = new ProjectData("deleted_project", "deleted_description")
+            ProjectData newProject = new ProjectData("deleted_project11", "deleted_description")
             {
-                Id = "6"
+                Id = "3"
             };
             AccountData account = new AccountData()
             {
                 Name = "administrator",
                 Password = "root"
             };
-            app.Api.DeleteProject(account, newProject);
+            IssueData issueData = new IssueData()
+            {
+                Category = "general",
+                Summary = "asdasdas",
+                Description = "sadasdasdasdasdasdasd"
+
+            };
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Console.WriteLine(client.mc_projects_get_user_accessible(account.Name, account.Password));
         }
     }
 }
