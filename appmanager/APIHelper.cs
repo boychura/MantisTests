@@ -40,9 +40,9 @@ namespace MantisTests
             client.mc_project_add(account.Name, account.Password, project);
         }
 
-        public ProjectData GetAllProjectsApi(AccountData account)
+        public List<ProjectData> GetAllProjectsApi(AccountData account)
         {
-            List<ProjectData> modelProjects = new ProjectData();
+            List<ProjectData> modelProjects = new List<ProjectData>();
             Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
             Mantis.ProjectData[] projects = client.mc_projects_get_user_accessible(account.Name, account.Password);
             foreach (Mantis.ProjectData project in projects)
