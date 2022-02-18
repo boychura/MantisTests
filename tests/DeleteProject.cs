@@ -23,7 +23,9 @@ namespace MantisTests
                 app.Api.CreateProject(user,newProject);
             }
 
-            app.Api.DeleteProject(user, newProject);
+
+            //app.Api.DeleteProject(user, newProject);
+            app.Project.Delete(0, newProject);
             List<ProjectData> newProjects = app.Api.GetAllProjectsApi(user);
             Assert.AreEqual((oldProjects.Count - 1), newProjects.Count);
         }
