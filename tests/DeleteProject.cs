@@ -17,12 +17,11 @@ namespace MantisTests
             AccountData user = new AccountData("administrator", "root");
 
             List<ProjectData> oldProjects = app.Api.GetAllProjectsApi(user);
-            ProjectData existingProject = oldProjects.Find(x => x.Name == newProject.Name);
-            if (existingProject == null)
+            if (oldProjects.Count == 0)
             {
                 app.Api.CreateProject(user,newProject);
             }
-
+            oldProjects = app.Api.GetAllProjectsApi(user);
 
             //app.Api.DeleteProject(user, newProject);
             app.Project.Delete(0, newProject);
